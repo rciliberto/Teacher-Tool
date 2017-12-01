@@ -4,25 +4,39 @@ def choiceCreator():
     multiple_choice = "abcdefg"
 
 
-    numberquestions = int(input("How many multiple choice questions do you want? "))
+    questionNum = int(input("How many multiple choice questions do you want? "))
 
-    numbermultiplechoice = int(input("How many choices per question? (Max 7) "))
+    choicePerQuestion = int(input("How many choices per question? (Max 7) "))
     iterator = 1
     finalstring = ""
 
-    # this while loop cycles through for each question.
-    while (iterator != numberquestions + 1):
+    for i in range(questionNum):
         question = input("What is question number " + str(iterator) + "?")
         finalstring += str(iterator) + ". " + question + "\n"
         choicecounter = 0
 
         # this nested while loop cycles through the possible choices for the question it applies to.
-        while (choicecounter < numbermultiplechoice):
+        while (choicecounter < choicePerQuestion):
             possibleAnswer = input("Type a possible answer.")
             finalstring += multiple_choice[choicecounter] + "." + possibleAnswer + "\n"
             choicecounter += 1
 
         iterator += 1
+
+    print(finalstring)
+    # this while loop cycles through for each question.
+    # while (iterator != questionNum + 1):
+    #     question = input("What is question number " + str(iterator) + "?")
+    #     finalstring += str(iterator) + ". " + question + "\n"
+    #     choicecounter = 0
+    #
+    #     # this nested while loop cycles through the possible choices for the question it applies to.
+    #     while (choicecounter < choicePerQuestion):
+    #         possibleAnswer = input("Type a possible answer.")
+    #         finalstring += multiple_choice[choicecounter] + "." + possibleAnswer + "\n"
+    #         choicecounter += 1
+    #
+    #     iterator += 1
 
     print(finalstring)
 
