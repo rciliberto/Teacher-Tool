@@ -1,15 +1,18 @@
+print("Hello! Welcome to TeacherTool. This is your one stop shop for ")
 
-numberquestions = int(input("How many multiple choice questions do you want?"))
-multiple_choice = "abcdefg"
-numbermultiplechoice = int(input("How many choices per question? (Max 7)"))
-iterator = 1
-finalstring = ""
+def choiceCreator:
 
-while (iterator != numberquestions + 1):
-    iterator += 1
-    question = input("What is your first question?")
-    choicecounter = 0
+    numberquestions = int(input("How many multiple choice questions do you want?"))
+    multiple_choice = "abcdefg"
+    numbermultiplechoice = int(input("How many choices per question? (Max 7)"))
+    iterator = 1
+    finalstring = ""
 
-    while (choicecounter < len(multiple_choice)):
-        choice = multiple_choice[choicecounter]
-        choicecounter += 1
+    while (iterator != numberquestions + 1):
+        iterator += 1
+        question = input("What is your first question?")
+        choicecounter = 0
+
+        while (choicecounter < len(multiple_choice)):
+            choice = multiple_choice[choicecounter]
+            choicecounter += 1
