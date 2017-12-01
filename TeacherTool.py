@@ -3,40 +3,18 @@ def choiceCreator():
     # storage string for response choices
     multiple_choice = "abcdefg"
 
-
     questionNum = int(input("How many multiple choice questions do you want? "))
 
-    choicePerQuestion = int(input("How many choices per question? (Max 7) "))
-    iterator = 1
+    choicesPerQuestion = int(input("How many choices per question? (Max 7) "))
     finalstring = ""
 
     for i in range(questionNum):
-        question = input("What is question number " + str(iterator) + "?")
-        finalstring += str(iterator) + ". " + question + "\n"
-        choicecounter = 0
+        question = input("What is question number " + str(i+1) + "?")
+        finalstring += str(i+1) + ". " + question + "\n"
 
-        # this nested while loop cycles through the possible choices for the question it applies to.
-        while (choicecounter < choicePerQuestion):
+        for j in range(choicesPerQuestion):
             possibleAnswer = input("Type a possible answer.")
-            finalstring += multiple_choice[choicecounter] + "." + possibleAnswer + "\n"
-            choicecounter += 1
-
-        iterator += 1
-
-    print(finalstring)
-    # this while loop cycles through for each question.
-    # while (iterator != questionNum + 1):
-    #     question = input("What is question number " + str(iterator) + "?")
-    #     finalstring += str(iterator) + ". " + question + "\n"
-    #     choicecounter = 0
-    #
-    #     # this nested while loop cycles through the possible choices for the question it applies to.
-    #     while (choicecounter < choicePerQuestion):
-    #         possibleAnswer = input("Type a possible answer.")
-    #         finalstring += multiple_choice[choicecounter] + "." + possibleAnswer + "\n"
-    #         choicecounter += 1
-    #
-    #     iterator += 1
+            finalstring += multiple_choice[j+1] + "." + possibleAnswer + "\n"
 
     print(finalstring)
 
