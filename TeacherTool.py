@@ -31,13 +31,13 @@ def choice_creator():
 # introduce the program and ask for user input
 print("Hello! Welcome to TeacherTool. This is your one stop shop for all your teaching needs.\n"\
 "type \"help\" for directions and possible commands.")
+While (true):
+    USER_CHOICE = str(input(">"))
 
-USER_CHOICE = str(input(">"))
+    # possible actions user can do
+    if USER_CHOICE == "help":
+        print("List of possible commands: \n"\
+        "To create a multiple choice test, type in \"Create multiple choice test\"\n")
 
-# possible actions user can do
-if USER_CHOICE == "help":
-    print("List of possible commands: \n"\
-    "To create a multiple choice test, type in \"Create multiple choice test\"\n")
-
-if USER_CHOICE == "Create multiple choice test":
-    choice_creator()
+    if USER_CHOICE == "Create multiple choice test":
+        choice_creator()
