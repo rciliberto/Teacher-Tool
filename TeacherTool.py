@@ -2,6 +2,17 @@
 Teacher Tool is a suite of useful tools for teachers.
 These include a test generator at the moment.
 """
+import os
+
+def clear():
+    """Clear terminal window depending on OS"""
+    # windows
+    if os.name == "nt":
+        os.system("cls")
+    # UNIX/MacOS
+    elif os.name == "posix":
+        os.system("clear")
+
 def choice_creator():
     """Ask for questions & answers and print the generated test"""
     # storage string for response choices
@@ -28,6 +39,7 @@ def choice_creator():
 MAIN
 """
 
+clear()
 # introduce the program
 print("Hello! Welcome to TeacherTool. This is your one stop shop for all your teaching needs.\n"\
 "type \"help\" for directions and possible commands.")
@@ -38,14 +50,16 @@ while True:
 
     if USER_CHOICE.upper() == "EXIT":
         break
-
     elif USER_CHOICE.upper() == "HELP":
         print("\nList of possible commands: \n"\
+        "CLEAR      -   Clear the screen\n"\
         "EXIT       -   Exit TeacherTool\n"\
         "HELP       -   Present this list of commands\n"\
         "\n"\
         "MKMCTEST   -   Make a multiple choice test\"\n")
 
+    elif USER_CHOICE.upper() == "CLEAR":
+        clear()
     elif USER_CHOICE.upper() == "MKMCTEST":
         choice_creator()
 
