@@ -3,6 +3,8 @@ Teacher Tool is a suite of useful tools for teachers.
 These include a test generator at the moment.
 """
 import os
+from docx import Document
+from docx.shared import Inches
 
 def clear():
     """Clear terminal window depending on OS"""
@@ -15,25 +17,32 @@ def clear():
 
 def choice_creator():
     """Ask for questions & answers and print the generated test"""
+    # creates a test document
+    test = Document()
+
+    # ask for a test name and add it to the doc
+    test_name = input("What is the name of your test?\n> ")
+    test.add_heading(test_name, 0)
+
     # storage string for response choices
     multiple_choice = "abcdefg"
 
     # ask for number of questions to be filled out
-    number_questions = int(input("\nHow many multiple choice questions do you want?"))
+    number_questions = int(input("\nHow many multiple choice questions do you want?\n> "))
 
     # ask for the number of answers per question
-    choices_per_question = int(input("\nHow many choices per question? (Max 7)\n>"))
-    test = ""
+    choices_per_question = int(input("\nHow many choices per question? (Max 7)\n> "))
+    #test = ""
 
     for i in range(number_questions):
-        question = input("\nWhat is question number " + str(i+1) + "?\n>")
-        test += str(i+1) + ". " + question + "\n"
+        question = input("\nWhat is question number " + str(i+1) + "?\n> ")
+        test.add_paragraph(str(i+1) + ". " + question)
 
         for j in range(choices_per_question):
-            possible_answer = input("\nType a possible answer.\n>")
-            test += "  " + multiple_choice[j] + "." + possible_answer + "\n"
+            possible_answer = input("\nType a possible answer.\n> ")
+            test.add_paragraph("\n  " + multiple_choice[j] + ". " + possible_answer + "\n")
 
-    print("\n" + test)
+    test.save(test_name + ".docx")
 
 """
 MAIN
@@ -46,7 +55,7 @@ print("Hello! Welcome to TeacherTool. This is your one stop shop for all your te
 
 #Begin inputs
 while True:
-    USER_CHOICE = str(input(">"))
+    USER_CHOICE = str(input("> "))
 
     if USER_CHOICE.upper() == "EXIT":
         break
