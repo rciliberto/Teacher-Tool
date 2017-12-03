@@ -56,11 +56,11 @@ while True:
         "EXIT       -   Exit TeacherTool\n"\
         "HELP       -   Present this list of commands\n"\
         "\n"\
-        "MKMCTEST   -   Make a multiple choice test\"\n")
+        "1          -   Make a multiple choice test\"\n")
 
     elif USER_CHOICE.upper() == "CLEAR":
         clear()
-    elif USER_CHOICE.upper() == "MKMCTEST":
+    elif USER_CHOICE.upper() == "1":
         choice_creator()
 
     else:
