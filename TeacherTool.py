@@ -43,18 +43,7 @@ clear()
 # introduce the program
 print("Hello! Welcome to TeacherTool. This is your one stop shop for all your teaching needs.\n"\
 "type \"help\" for directions and possible commands.")
-While (true):
-    USER_CHOICE = str(input(">"))
 
-<<<<<<< HEAD
-    # possible actions user can do
-    if USER_CHOICE == "help":
-        print("List of possible commands: \n"\
-        "To create a multiple choice test, type in \"Create multiple choice test\"\n")
-
-    if USER_CHOICE == "Create multiple choice test":
-        choice_creator()
-=======
 #Begin inputs
 while True:
     USER_CHOICE = str(input(">"))
@@ -76,4 +65,3 @@ while True:
 
     else:
         print("Unknown command. type \"help\" for a list of commands")
->>>>>>> 77b179eeccfe76c3041b82bed1e4ff350ad8f7f5
