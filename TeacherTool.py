@@ -40,7 +40,8 @@ def choice_creator():
 
         for j in range(choices_per_question):
             possible_answer = input("\nType a possible answer.\n> ")
-            test.add_paragraph("\n  " + multiple_choice[j] + ". " + possible_answer + "\n")
+            test.add_paragraph("  " + multiple_choice[j] + ". " + possible_answer)
+        test.add_paragraph("")
 
     test.save(test_name + ".docx")
 
