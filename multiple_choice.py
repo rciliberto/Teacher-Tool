@@ -8,9 +8,7 @@ class MCQuestion:
 
     question = ""
     answers = []
-
-    def __init__(self, question):
-        self.question = question
+    correct_index = -1
 
     def __repr__(self):
         output = self.question + "\n"
@@ -18,18 +16,21 @@ class MCQuestion:
             output += LETTERS[i] + ". " + self.answers[i] + "\n"
         return output
 
-    def add_answer(self, answer):
+    def set_question(self, question):
+        """sets the question"""
+        self.question = str(question)
+
+    def add_answer(self, answer, is_correct):
         """add an answer to the question"""
         self.answers.append(answer)
+        if is_correct:
+            self.correct_index = len(self.answers)-1
 
 class MCTest:
     """A test object that stores multiple questions"""
 
     test_name = ""
     questions = []
-
-    def __init__(self, name):
-        self.test_name = name
 
     def __repr__(self):
         for question in self.questions:
@@ -38,3 +39,7 @@ class MCTest:
     def add_question(self, question):
         """add a question to the test"""
         self.questions.append(question)
+
+    def set_name(self, name):
+        """Set the name of the test"""
+        self.test_name = str(name)
