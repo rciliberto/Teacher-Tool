@@ -3,8 +3,11 @@ Teacher Tool is a suite of useful tools for teachers.
 These include a test generator at the moment.
 """
 import os
+
 from docx import Document
-from docx.shared import Inches
+
+from multiple_choice import MCQuestion, MCTest
+
 
 def clear():
     """Clear terminal window depending on OS"""
@@ -18,14 +21,13 @@ def clear():
 def choice_creator():
     """Ask for questions & answers and print the generated test"""
     # creates a test document
-    test = Document()
+    doc = Document()
+    test = MCTest()
 
     # ask for a test name and add it to the doc
     test_name = input("What is the name of your test?\n> ")
-    test.add_heading(test_name, 0)
-
-    # storage string for response choices
-    multiple_choice = "abcdefg"
+    test.set_name(test_name)
+    doc.add_heading(test.test_name, 0)
 
     # ask for number of questions to be filled out
     number_questions = int(input("\nHow many multiple choice questions do you want?\n> "))
@@ -35,14 +37,24 @@ def choice_creator():
     #test = ""
 
     for i in range(number_questions):
-        question = input("\nWhat is question number " + str(i+1) + "?\n> ")
-        test.add_paragraph(str(i+1) + ". " + question)
+        question = MCQuestion()
 
-        for j in range(choices_per_question):
-            possible_answer = input("\nType a possible answer.\n> ")
-            test.add_paragraph("\n  " + multiple_choice[j] + ". " + possible_answer + "\n")
+        quest = input("\nWhat is question number " + str(i+1) + "?\n> ")
+        question.set_question(quest)
+        doc.add_paragraph(str(i+1) + ". " + quest)
 
-    test.save(test_name + ".docx")
+        corr = input("\nWhat is the correct answer?\n> ")
+        question.add_answer(corr, True)
+
+        for j in range(choices_per_question-1):
+            ans = input("\nType a possible answer.\n> ")
+            question.add_answer(ans, False)
+            doc.add_paragraph("  " + MCQuestion.LETTERS[j] + ". " + ans)
+        doc.add_paragraph("")
+
+    doc.save(test_name + ".docx")
+    print("Sucessfully Created test!")
+    print(test)
 
 """
 MAIN
