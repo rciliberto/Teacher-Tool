@@ -62,7 +62,7 @@ print("Hello! Welcome to TeacherTool. This is your one stop shop for all your te
 "type \"help\" for directions and possible commands.")
 
 # global MCTest variable
-test = MCTest()
+MC_TEST = MCTest()
 
 #Begin inputs
 while True:
@@ -81,7 +81,7 @@ while True:
     elif USER_CHOICE.upper() == "CLEAR":
         clear()
     elif USER_CHOICE.upper() == "1":
-        choice_creator(test)
+        choice_creator(MC_TEST)
 
     else:
         print("Unknown command. type \"help\" for a list of commands")
