@@ -6,7 +6,7 @@ from docx import Document
 class MCQuestion(object):
     """A question object that stores a question and its answers"""
     LETTERS = "abcdefg"
-    
+
     def __init__(self):
         self.question = ""
         self.answers = []
@@ -57,7 +57,7 @@ class MCTest(object):
             doc.add_paragraph(str(i+1) + ". " + self.questions[i].question)
 
             for j in range(len(self.questions[i].answers)):
-                doc.add_paragraph("  " + MCQuestion.LETTERS[j] + ". " + self.questions[i].answers[j])
+                doc.add_paragraph(" " + MCQuestion.LETTERS[j] + ". " + self.questions[i].answers[j])
 
         doc.add_paragraph("")
         doc.save(self.test_name + ".docx")
