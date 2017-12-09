@@ -18,43 +18,41 @@ def clear():
     elif os.name == "posix":
         os.system("clear")
 
-def choice_creator():
+def choice_creator(test):
     """Ask for questions & answers and print the generated test"""
     # creates a test document
-    doc = Document()
     test = MCTest()
 
     # ask for a test name and add it to the doc
     test_name = input("What is the name of your test?\n> ")
     test.set_name(test_name)
-    doc.add_heading(test.test_name, 0)
 
     # ask for number of questions to be filled out
     number_questions = int(input("\nHow many multiple choice questions do you want?\n> "))
 
     # ask for the number of answers per question
     choices_per_question = int(input("\nHow many choices per question? (Max 7)\n> "))
-    #test = ""
 
     for i in range(number_questions):
+        # ask for the question
         question = MCQuestion()
-
         quest = input("\nWhat is question number " + str(i+1) + "?\n> ")
         question.set_question(quest)
-        doc.add_paragraph(str(i+1) + ". " + quest)
 
-        corr = input("\nWhat is the correct answer?\n> ")
-        question.add_answer(corr, True)
+        # ask for the correct answer
+        correct = input("\nWhat is the correct answer?\n> ")
+        question.add_answer(correct, True)
 
+        # ask for answers
         for j in range(choices_per_question-1):
             ans = input("\nType a possible answer.\n> ")
             question.add_answer(ans, False)
-            doc.add_paragraph("  " + MCQuestion.LETTERS[j] + ". " + ans)
-        doc.add_paragraph("")
 
-    doc.save(test_name + ".docx")
+        test.add_question(question)
+
+    # make .docx file
+    test.make_docx()
     print("Sucessfully Created test!")
-    print(test)
 
 def scrambler(test):
     """scrambles both the questions and the answers for each question when a test is given"""
@@ -85,6 +83,9 @@ clear()
 print("Hello! Welcome to TeacherTool. This is your one stop shop for all your teaching needs.\n"\
 "type \"help\" for directions and possible commands.")
 
+# global MCTest variable
+test = MCTest()
+
 #Begin inputs
 while True:
     USER_CHOICE = str(input("> "))
@@ -102,7 +103,7 @@ while True:
     elif USER_CHOICE.upper() == "CLEAR":
         clear()
     elif USER_CHOICE.upper() == "1":
-        choice_creator()
+        choice_creator(test)
 
     else:
         print("Unknown command. type \"help\" for a list of commands")
