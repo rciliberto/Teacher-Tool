@@ -3,7 +3,7 @@ Teacher Tool is a suite of useful tools for teachers.
 These include a test generator at the moment.
 """
 import os
-
+import random
 from docx import Document
 
 from multiple_choice import MCQuestion, MCTest
@@ -55,6 +55,26 @@ def choice_creator():
     doc.save(test_name + ".docx")
     print("Sucessfully Created test!")
     print(test)
+
+def scrambler(test):
+    """scrambles both the questions and the answers for each question when a test is given"""
+    newtest = MCTest()
+    for i in range(len(test.questions)):
+        newtest.questions[i] = MCQuestion()
+
+    for i in range(len(test.questions)):
+        index = random.randint(0, len(test.questions) - 1)
+        while newtest.questions[index].question != "":
+            index = random.randint(0, len(test.questions) - 1)
+        newtest.questions[index] = test.questions[i]
+
+        for j in range(len(test.questions[i].answers)):
+            ansindex = random.randint(0, len(test.questions[i].answers) - 1)
+            while newtest.questions[index].answers[ansindex] != "":
+                ansindex = random.randint(0, len(test.questions[i].answers) - 1)
+            newtest.questions[i].answers[ansindex] = test.questions[i].answers[j]
+
+    return newtest
 
 """
 MAIN
