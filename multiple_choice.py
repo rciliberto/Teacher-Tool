@@ -1,6 +1,7 @@
 """
 Includes multiple choice test and question classes and related final static variables
 """
+from docx import Document
 
 class MCQuestion(object):
     """A question object that stores a question and its answers"""
@@ -47,3 +48,16 @@ class MCTest(object):
     def set_name(self, name):
         """Set the name of the test"""
         self.test_name = str(name)
+
+    def make_docx(self):
+        """Make a .docx document representation of the test"""
+        doc = Document()
+        doc.add_heading(self.test_name, 0)
+        for i in range(len(self.questions)):
+            doc.add_paragraph(str(i+1) + ". " + self.questions[i].question)
+
+            for j in range(len(self.questions[i].answers)):
+                doc.add_paragraph("  " + MCQuestion.LETTERS[j] + ". " + self.questions[i].answers[j])
+
+        doc.add_paragraph("")
+        doc.save(self.test_name + ".docx")
