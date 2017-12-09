@@ -54,23 +54,23 @@ def choice_creator(test):
     test.make_docx()
     print("Sucessfully Created test!")
 
-def scrambler(test):
+def scrambler(original_test):
     """scrambles both the questions and the answers for each question when a test is given"""
     newtest = MCTest()
-    for i in range(len(test.questions)):
+    for i in range(len(original_test.questions)):
         newtest.questions[i] = MCQuestion()
 
-    for i in range(len(test.questions)):
-        index = random.randint(0, len(test.questions) - 1)
+    for i in range(len(original_test.questions)):
+        index = random.randint(0, len(original_test.questions) - 1)
         while newtest.questions[index].question != "":
-            index = random.randint(0, len(test.questions) - 1)
-        newtest.questions[index] = test.questions[i]
+            index = random.randint(0, len(original_test.questions) - 1)
+        newtest.questions[index] = original_test.questions[i]
 
-        for j in range(len(test.questions[i].answers)):
-            ansindex = random.randint(0, len(test.questions[i].answers) - 1)
+        for j in range(len(original_test.questions[i].answers)):
+            ansindex = random.randint(0, len(original_test.questions[i].answers) - 1)
             while newtest.questions[index].answers[ansindex] != "":
-                ansindex = random.randint(0, len(test.questions[i].answers) - 1)
-            newtest.questions[i].answers[ansindex] = test.questions[i].answers[j]
+                ansindex = random.randint(0, len(original_test.questions[i].answers) - 1)
+            newtest.questions[i].answers[ansindex] = original_test.questions[i].answers[j]
 
     return newtest
 
