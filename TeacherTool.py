@@ -55,28 +55,33 @@ def choice_creator(test):
     # make .docx files
     if num_copies > 0:
         for i in range(num_copies):
-            scrambler(test).make_docx(test.test_name + "_" + str(i+1))
+            new_name = test.test_name + "_" + str(i+1)
+            scrambled_test = scrambler(test, new_name)
+
+            scrambled_test.make_docx(test.test_name + "_" + str(i+1))
+            scrambled_test.make_answer_key()
     else:
-        test.make_docx("MASTER")
+        test.make_docx(test.test_name + "_MASTER")
+        test.make_answer_key()
+
     print("Sucessfully Created test!")
 
-def scrambler(original_test):
+def scrambler(original_test, new_name):
     """scrambles both the questions and the answers for each question when a test is given"""
     new_test = MCTest()
 
     for question in original_test.questions:
-        new_test.questions.insert(random.randint(0, len(new_test.questions)), question)
-    
+        new_index = random.randint(0, len(new_test.questions))
+        new_test.questions.insert(new_index, question)
+
     for question in new_test.questions:
         temp = []
         for i in range(len(question.answers)):
-            new_index=random.randint(0, len(temp))
-            if i == question.correct_index:
-                question.correct_index = new_index
-            if new_index <= question.correct_index:
-                question.correct_index += 1
+            new_index = random.randint(0, len(temp))
             temp.insert(new_index, question.answers[i])
         question.answers = temp
+
+    new_test.test_name = new_name
 
     return new_test
 
@@ -92,7 +97,7 @@ print("Hello! Welcome to TeacherTool. This is your one stop shop for all your te
 # global MCTest variable
 MC_TEST = MCTest()
 
-#Begin inputs
+# begin inputs
 while True:
     USER_CHOICE = str(input("> "))
 
