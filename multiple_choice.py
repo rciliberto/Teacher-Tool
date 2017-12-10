@@ -18,12 +18,14 @@ class MCQuestion(object):
     # string whose indexes are accessed for multiple choices
     LETTERS = "abcdefg"
 
-    # create a question string, an answer array, and an index for the correct answer in the answer array
+    # create a question string, an answer array, and an index for the
+    # correct answer in the answer array
     def __init__(self):
         self.question = ""
         self.answers = []
 
-    # print the question followed by the answers. The letter is determined based on the index of the answer in the answer array.
+    # print the question followed by the answers.
+    # The letter is determined based on the index of the answer in the answer array.
     def __str__(self):
         output = "  " + self.question + "\n"
         for i in range(len(self.answers)):
@@ -34,7 +36,8 @@ class MCQuestion(object):
         """sets the question"""
         self.question = str(question)
 
-    # add answers to the answer array, and if it's correct, set correct_index to the correct answer's index
+    # add answers to the answer array, and if it's correct,
+    # set correct_index to the correct answer's index
     def add_answer(self, answer, is_correct):
         """add an answer to the question"""
         self.answers.append(MCAnswer(answer, is_correct))
@@ -53,7 +56,7 @@ class MCTest(object):
         for question in self.questions:
             output += str(question) + "\n"
         return output
-    
+
     def add_question(self, question):
         """add a question to the test"""
         self.questions.append(question)
