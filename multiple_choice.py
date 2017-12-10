@@ -49,7 +49,7 @@ class MCTest(object):
         """Set the name of the test"""
         self.test_name = str(name)
 
-    def make_docx(self):
+    def make_docx(self, doc_name):
         """Make a .docx document representation of the test"""
         doc = Document()
         doc.add_heading(self.test_name, 0)
@@ -60,4 +60,4 @@ class MCTest(object):
                 doc.add_paragraph(" " + MCQuestion.LETTERS[j] + ". " + self.questions[i].answers[j])
 
         doc.add_paragraph("")
-        doc.save(self.test_name + ".docx")
+        doc.save(doc_name + ".docx")

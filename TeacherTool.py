@@ -4,7 +4,6 @@ These include a test generator at the moment.
 """
 import os
 import random
-from docx import Document
 
 from multiple_choice import MCQuestion, MCTest
 
@@ -26,6 +25,9 @@ def choice_creator(test):
     # ask for a test name and add it to the doc
     test_name = input("What is the name of your test?\n> ")
     test.set_name(test_name)
+
+    # ask for number of copies
+    num_copies = int(input("How many scrambled copies do you want?\n> "))
 
     # ask for number of questions to be filled out
     number_questions = int(input("\nHow many multiple choice questions do you want?\n> "))
@@ -50,29 +52,33 @@ def choice_creator(test):
 
         test.add_question(question)
 
-    # make .docx file
-    test.make_docx()
+    # make .docx files
+    if num_copies > 0:
+        for i in range(num_copies):
+            scrambler(test).make_docx(test.test_name + "_" + str(i+1))
+    else:
+        test.make_docx("MASTER")
     print("Sucessfully Created test!")
 
 def scrambler(original_test):
     """scrambles both the questions and the answers for each question when a test is given"""
-    newtest = MCTest()
-    for i in range(len(original_test.questions)):
-        newtest.questions[i] = MCQuestion()
+    new_test = MCTest()
 
-    for i in range(len(original_test.questions)):
-        index = random.randint(0, len(original_test.questions) - 1)
-        while newtest.questions[index].question != "":
-            index = random.randint(0, len(original_test.questions) - 1)
-        newtest.questions[index] = original_test.questions[i]
+    for question in original_test.questions:
+        new_test.questions.insert(random.randint(0, len(new_test.questions)), question)
+    
+    for question in new_test.questions:
+        temp = []
+        for i in range(len(question.answers)):
+            new_index=random.randint(0, len(temp))
+            if i == question.correct_index:
+                question.correct_index = new_index
+            if new_index <= question.correct_index:
+                question.correct_index += 1
+            temp.insert(new_index, question.answers[i])
+        question.answers = temp
 
-        for j in range(len(original_test.questions[i].answers)):
-            ansindex = random.randint(0, len(original_test.questions[i].answers) - 1)
-            while newtest.questions[index].answers[ansindex] != "":
-                ansindex = random.randint(0, len(original_test.questions[i].answers) - 1)
-            newtest.questions[i].answers[ansindex] = original_test.questions[i].answers[j]
-
-    return newtest
+    return new_test
 
 """
 MAIN
@@ -104,6 +110,5 @@ while True:
         clear()
     elif USER_CHOICE.upper() == "1":
         choice_creator(MC_TEST)
-
     else:
         print("Unknown command. type \"help\" for a list of commands")
