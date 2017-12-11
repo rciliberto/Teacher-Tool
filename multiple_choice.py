@@ -73,12 +73,12 @@ class MCTest(object):
 
         # cycle through each question to add it to the doc
         for i in range(len(self.questions)):
-            doc.add_paragraph(str(i+1) + ". " + self.questions[i].question)
+            doc.add_paragraph("\n    " + str(i+1) + ". " + self.questions[i].question)
 
             # cycle through each answer in the question to add it to the question
             for j in range(len(self.questions[i].answers)):
-                doc.add_paragraph(" " + MCQuestion.LETTERS[j] + ". "\
-                    "" + str(self.questions[i].answers[j]))
+                doc.add_paragraph("        " + MCQuestion.LETTERS[j] + ". "\
+                    "" + str(self.questions[i].answers[j]) + "")
 
         # save the document
         doc.add_paragraph("")
@@ -92,10 +92,10 @@ class MCTest(object):
         for i in range(len(self.questions)):
             question = self.questions[i]
 
-            doc.add_paragraph(str(i+1) + ". " + question.question)
+            doc.add_paragraph("\n    " + str(i+1) + ". " + question.question)
             for j in range(len(question.answers)):
                 if question.answers[j].is_correct:
-                    doc.add_paragraph(" " + MCQuestion.LETTERS[j] + ". "\
+                    doc.add_paragraph("        " + MCQuestion.LETTERS[j] + ". "\
                         "" + str(question.answers[j]))
 
         doc.add_paragraph("")

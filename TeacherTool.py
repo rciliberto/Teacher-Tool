@@ -27,13 +27,28 @@ def choice_creator(test):
     test.set_name(test_name)
 
     # ask for number of copies
-    num_copies = int(input("How many scrambled copies do you want?\n> "))
+    num_copies = -1
+    while num_copies < 0:
+        try:
+            num_copies = int(input("How many forms do you want?\n> "))
+        except:
+            print("You must enter a positive number. Try again:\n")
 
     # ask for number of questions to be filled out
-    number_questions = int(input("\nHow many multiple choice questions do you want?\n> "))
+    number_questions = -1
+    while number_questions < 0:
+        try:
+            number_questions = int(input("\nHow many multiple choice questions do you want?\n> "))
+        except:
+            print("You must enter a positive number. Try again:\n")
 
     # ask for the number of answers per question
-    choices_per_question = int(input("\nHow many choices per question? (Max 7)\n> "))
+    choices_per_question = -1
+    while choices_per_question < 0 or choices_per_question > 7:
+        try:
+            choices_per_question = int(input("\nHow many choices per question? (Max 7)\n> "))
+        except:
+            print("You must enter a positive number less than or equal to 7. Try again:")
 
     for i in range(number_questions):
         # ask for the question
@@ -53,16 +68,18 @@ def choice_creator(test):
         test.add_question(question)
 
     # make .docx files
-    if num_copies > 0:
+    if num_copies > 1:
         for i in range(num_copies):
-            new_name = test.test_name + "_" + str(i+1)
+            new_name = test.test_name + " Form " + str(i+1)
             scrambled_test = scrambler(test, new_name)
 
-            scrambled_test.make_docx(test.test_name + "_" + str(i+1))
+            scrambled_test.make_docx(new_name)
             scrambled_test.make_answer_key()
     else:
-        test.make_docx(test.test_name + "_MASTER")
-        test.make_answer_key()
+        doc_name = test.test_name + "_MASTER"
+        scrambled_test = scrambler(test, test.test_name)
+        scrambled_test.make_docx(doc_name)
+        scrambled_test.make_answer_key()
 
     print("Sucessfully Created test!")
 
